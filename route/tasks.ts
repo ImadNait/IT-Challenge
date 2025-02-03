@@ -36,7 +36,8 @@ export const taskRoutes = new Elysia({ prefix: "/tasks" })
     })
 
     .put("/:id", async ({ params, body }) => { 
-        const updatedTask = await TaskModel.findByIdAndUpdate(params.id, {body}, { new: true });
+        const updatedFields = body;
+        const updatedTask = await TaskModel.findByIdAndUpdate(params.id, {updatedFields});
         if (!updatedTask) throw new Error("Task not found");
         return updatedTask;
     })
